@@ -1,0 +1,32 @@
+version: "3"
+services:
+  database:
+        image: mongo
+        networks:
+            - backend
+        environment:
+            - MONGO_INITDB_DATABASE=cursoDocker
+        ports:
+            - "27017:27017"
+        volumes:
+            - db-data:/data/db
+        command: --smallfiles --noprealloc
+        restart: always
+
+    web:
+        image: weslleycsil/curso-docker-node:latest
+        networks:
+            - backend
+        ports:
+            - 9001:8080
+        depends_on:
+            - database
+        deploy:
+            replicas: 1
+        command: npm start
+        working_dir: /usr/src/app
+
+volumes:
+    db-data:
+networks:
+    backend:

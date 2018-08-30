@@ -1,0 +1,21 @@
+{
+  "name": "curso_docker_pra_que",
+  "version": "1.0.0",
+  "description": "Api do Curso Docker Pra que?",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Weslley Silva",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.2"
+  }
+}
