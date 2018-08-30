@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+    traefik:
+        image: traefik:tetedemoine
+        command:
+            - "--api"
+            - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+            - "--entrypoints=Name:https Address::443 TLS"
+            - "--defaultentrypoints=http,https"
+            - "--acme"
+            - "--acme.storage=/data/acme.json"
+            - "--acme.entryPoint=https"
+            - "--acme.httpChallenge.entryPoint=http"
+            - "--acme.onHostRule=true"
+            - "--acme.onDemand=false"
+            - "--acme.email=weslleycsil@gmail.com"
+            - "--docker"
+            - "--docker.swarmMode"
+            - "--docker.domain=sr01.twcreativs.stream"
+            - "--docker.watch"
+        networks:
+            - traefik-net
+        ports:
+            - "80:80"
+            - "443:443"
+            - "9001:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - traefik_data:/data
+        deploy:
+            placement:
+                constraints: [node.role==manager]
+            update_config:
+                parallelism: 1
+                delay: 10s
+
+    portainer:
+        image: portainer/portainer
+        command: -H unix:///var/run/docker.sock
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+        networks:
+            - traefik-net
+        ports:
+            - "9000:9000"
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+            labels:
+                - "traefik.port=9000"
+                - "traefik.frontend.rule=Host:dash.sr01.twcreativs.stream"
+
+
+
+volumes:
+    portainer_data:
+    traefik_data:
+
+networks:
+    traefik-net:

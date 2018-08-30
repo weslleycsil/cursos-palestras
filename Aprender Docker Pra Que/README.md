@@ -3,7 +3,16 @@
 Esse repositório contém os códigos utilizados durante o mini curso de Aprender Docker pra Que?
 
   
- Você encontra os slides utilizados em:  []()
+Você encontra os slides utilizados em:  [https://goo.gl/vCyVqs](https://goo.gl/vCyVqs)
+
+Você pode responder uma breve pesquisa em: [https://goo.gl/forms/5Py2Hn2orJEdW0Pf2](https://goo.gl/forms/5Py2Hn2orJEdW0Pf2)
+
+Voce pode criar uma conta em ganhar $10 em crédito para utilizar na [Digital Ocean](https://m.do.co/c/4e2a1d95337f)
+
+[Portainer](https://portainer.io)
+[Docker Hub](https://hub.docker.com)
+[Linux Tips Videos Docker](https://www.youtube.com/watch?v=0xxHiOSJVe8&list=PLf-O3X2-mxDkiUH0r_BadgtELJ_qyrFJ_)
+[Linux Tips](https://www.linuxtips.com.br)
 
  # O Curso
 
