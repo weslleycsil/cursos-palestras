@@ -12,3 +12,10 @@ services:
 
 volumes:
   portainer_data:
+
+
+curl --request POST \
+--url http://66.42.44.52:9001/ \
+--header 'Cache-Control: no-cache' \
+--header 'Content-Type: application/json' \
+--data '{"codigo":"12345","nome":"Weslley","email":"weslleycsil@email.com"}'
