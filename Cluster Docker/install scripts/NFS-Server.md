@@ -3,14 +3,14 @@ Instalação do Servidor NFS no Centos 7
 
 Documento com o passo a passo para a instalação, configuração e utilização de um serviço NFS rodando sob Centos 7 para utilização em um Cluster Docker Swarm (podendo ser utilizado também para outros fins).
 
-- Configurações Básicas do Servidor
-- Preparar os Discos com LVM
-- Montar os Volumes e configura no FSTAB
-- Configurar o Serviço NFS
-- Estender discos em caso de pouco espaço livre
+- [Configurações Básicas do Servidor](#configurações-básicas)
+- [Preparar os Discos com LVM](#volumes-lvm)
+- [Montar os Volumes e configura no FSTAB](#montar-os-volumes-no-sistema)
+- [Instalar e Configurar o Serviço NFS](#instalação)
+- [Estender discos em caso de pouco espaço livre](#estender-volumes-lvm)
 
 Configurações Básicas
------------
+=============
 
 ## Verificar as configurações de Rede
 
@@ -212,5 +212,5 @@ e2fsck -f /dev/HDD/HDD_VOL
 
 Links Úteis para Consulta
 -----------
+[Extend an Reduce LVMs in linux](https://www.tecmint.com/extend-and-reduce-lvms-in-linux/)
 
-https://www.tecmint.com/extend-and-reduce-lvms-in-linux/
