@@ -169,6 +169,14 @@ systemctl start nfs-server && systemctl enable nfs-server
 Configuração do Serviço NFS
 -----------
 
+Configuração básica do serviço:
+
+arquivo /etc/sysconfig/nfs
+```
+RPCNFSDCOUNT=64
+RPCNFSDARGS="-N 2 -N 3 -U" //apenas v4
+```
+
 Sempre que se for criar um novo compartilhamento para uma determinada aplição, basta fazer a adição da pasta no caminho /etc/exports conforme o modelo abaixo:
 
 ```
