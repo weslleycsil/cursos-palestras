@@ -220,7 +220,7 @@ e2fsck -f /dev/HDD/HDD_VOL
 
 Links Úteis para Consulta
 -----------
-[Extend an Reduce LVMs in linux](https://www.tecmint.com/extend-and-reduce-lvms-in-linux/)
-[Viva o Linux VLM](https://www.vivaolinux.com.br/dica/LVM-Logical-Volume-Manager)
-[Entendendo LVM](https://www.vivaolinux.com.br/artigo/Entendendo-e-configurando-o-LVM-manualmente?pagina=4)
-[LVM Dicas Rapidas](http://gutocarvalho.net/octopress/2013/05/17/lvm-dicas-rapidas/)
+- [Extend an Reduce LVMs in linux](https://www.tecmint.com/extend-and-reduce-lvms-in-linux/)
+- [Viva o Linux VLM](https://www.vivaolinux.com.br/dica/LVM-Logical-Volume-Manager)
+- [Entendendo LVM](https://www.vivaolinux.com.br/artigo/Entendendo-e-configurando-o-LVM-manualmente?pagina=4)
+- [LVM Dicas Rapidas](http://gutocarvalho.net/octopress/2013/05/17/lvm-dicas-rapidas/)
