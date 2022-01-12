@@ -14,6 +14,8 @@ Caso queira mais informações sobre o Canal, Instagram ou quiser mais links, Ac
 
 Comece criando o servidor NFS, após toda a configuração dele Feita, parta para a configuração dos nós Docker, separando em Managers e Workers. O processos dos dois tipos de nós são bem próximos, no manual correspondente será melhor explicado.
 
+[Pré-requisitos e Inicio](https://github.com/weslleycsil/cursos-palestras/tree/master/Cluster%20Docker/install)
+
 Passo a passo para configurar o Servidor NFS:
 [Servidor NFS](https://github.com/weslleycsil/cursos-palestras/blob/master/Cluster%20Docker/install/NFS-Server.md)
 

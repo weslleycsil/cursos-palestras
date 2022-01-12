@@ -2,7 +2,7 @@
 
 Após feita toda a configuração do cluster, é hora de subir algumas stacks para podermos começar a trabalhar com o cluster.
 
-Serão 3 Stacks que subiremos, a do [Portainer](#portainer), a do [Traefik](#traefik) e a da nossa [Aplicação](). Também subiremos uma stack [exemplo]() apenas para testes.
+Serão 3 Stacks que subiremos, a do [Portainer](#portainer), a do [Traefik](#traefik) e a da nossa [Aplicação](#aplicação-final). Também subiremos uma stack [exemplo](#aplicação-exemplo) apenas para testes.
 
 ## Portainer
 
