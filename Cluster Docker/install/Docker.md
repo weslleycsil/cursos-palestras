@@ -190,7 +190,7 @@ Configuração do Docker Node (Worker)
 Com a saída do comando anterior (docker swarm init) você deve completar o abaixo com o token passado para poder ingressar os nós de computação no Docker Manager.
 
 ```
-docker swarm join --token SWMTKN-1-5bfl24udz1jg58a1jnd15vbe6kvxdzky9cb1xhd7rdrmvr22cr-atqtky9bk3u7fycwx8v9xhj97 10.10.10.1:2377
+docker swarm join --token $swarmtoken 10.10.10.1:2377
 ```
 
 Configurando o Recolhimento de Métricas do Docker
