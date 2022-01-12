@@ -5,8 +5,10 @@ Documento com o passo a passo para a instalação, configuração e utilização
 
 - [Configurações Básicas do Servidor](#configurações-básicas)
 - [Instalar e Configurar o Docker](#instalação-do-docker)
-- [Configurar Manager Docker]()
-- [Configurar Node Docker]()
+- [Configurar Manager Docker](#configuração-do-docker-manager)
+- [Configurar Node Docker (Worker)](#configuração-do-docker-node-worker)
+- [Recolhimento de Métricas do Docker](#configurando-o-recolhimento-de-métricas-do-docker)
+- [Proximo Passo](#)
 
 Configurações Básicas
 =============
@@ -170,6 +172,7 @@ Configuração do Docker Manager
 -----------
 
 Para configurar uma nova instância do Docker Swarm é bem dificil, basta executar o comando abaixo e usar a saida dele para ingressar os nós de computação (Workers) ao nó Manager.
+Lembrando alguns pontos importantes, não é necessário o --advertise-addr porém como queremos que o cluster trabalhe inteiramente em uma interface de rede interna e não na interface escancarada para o mmundo, é necessário informar ao cluster qual será o ip utilizado.
 
 ```
 docker swarm init --advertise-addr 10.10.10.1
@@ -193,6 +196,8 @@ docker swarm join --token SWMTKN-1-5bfl24udz1jg58a1jnd15vbe6kvxdzky9cb1xhd7rdrmv
 Configurando o Recolhimento de Métricas do Docker
 -----------
 
+Para configurar o docker para expor suas métricas para programas como Prometheus e Zabbix, basta seguir o passo abaixo, após é só configurar na sua plataforma.
+
 arquivo /etc/docker/daemon.json
 ```
 {
@@ -200,3 +205,13 @@ arquivo /etc/docker/daemon.json
   "experimental" : true
 }
 ```
+
+Deixo como dica o Repositório [Giropops Monitoring](https://github.com/badtuxx/giropops-monitoring) da Linuxtips para a galera que quiser montar uma stack de monitoração e aproveitar já botar o docker pra ser monitorado.
+
+Próximo Passo - Subir as Stacks
+-----------
+
+Como próximo passo, após subir os Managers e os Workers, podemos começar a subir as stacks que irão trabalhar no cluster.
+Inicialmente as mais importantes são o portainer para poder ver de forma mais gráfica nosso cluster e também o TRAEFIK que será o nosso "nginx" que convenhamos o traefik desempenha esse papel bem melhor...
+
+Então simbora [Clica aqui e Boraaaa](https://github.com/weslleycsil/cursos-palestras/tree/master/Cluster%20Docker/composes)
