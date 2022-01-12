@@ -20,4 +20,4 @@ Para o cluster serão 3 maquinas, sendo uma delas um Manager e duas Workers. [Pe
 
 Então serão 1 Manager e 2 Workers, o processo é práticamente igual, mudando apenas o comando de iniciar o swarm.
 
-Instruções para o [Cluster Docker](https://github.com/weslleycsil/cursos-palestras/blob/master/Cluster%20Docker/install/Docker.md)
+[Instruções para o Cluster Docker](https://github.com/weslleycsil/cursos-palestras/blob/master/Cluster%20Docker/install/Docker.md)
