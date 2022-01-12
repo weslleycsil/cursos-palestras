@@ -111,6 +111,24 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 ```
 
+## Firewall (desativar é opcional, ou adicionar regras)
+
+Alguns desabilitam o firewall, não é algo super aconselhavel, mas você também tem a opção de adicionar as regras de portas para funcionar o serviço sem desativar
+
+Desativando o firewall:
+```
+systemctl stop firewalld && systemctl disable firewalld
+```
+
+Regras para o Firewall:
+```
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-port=2049/tcp
+firewall-cmd --permanent --add-port=2049/udp
+firewall-cmd --reload
+```
+
 Volumes LVM
 -----------
 
