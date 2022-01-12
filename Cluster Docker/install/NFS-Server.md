@@ -72,6 +72,10 @@ Adicionando nos arquivos de configuração de interfaces (ifcfg-eth0 e ifcfg-ens
 NM_CONTROLLED=no
 ```
 
+Após as modificações do arquivo de rede, você deve reiniciar o serviço de rede ou o computador.
+```
+systemctl restart network
+```
 
 ## Servidor NTP e Hora local
 
