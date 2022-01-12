@@ -190,7 +190,7 @@ após basta executar o comando abaixo para iniciar o compartilhamento.
 exportfs -a
 ```
 
-Há um script na pasta scripts chamado new_nfs.sh que pode ser executado para a criação automática.
+Há um script na pasta scripts chamado new_nfs.sh que pode ser executado para a criação automática. [Script](https://github.com/weslleycsil/cursos-palestras/blob/master/Cluster%20Docker/scripts/new_nfs.sh)
 
 Para verificar os compartilhamentos ativos de um servidor basta utilizar:
 ```
@@ -221,4 +221,6 @@ e2fsck -f /dev/HDD/HDD_VOL
 Links Úteis para Consulta
 -----------
 [Extend an Reduce LVMs in linux](https://www.tecmint.com/extend-and-reduce-lvms-in-linux/)
-
+[Viva o Linux VLM](https://www.vivaolinux.com.br/dica/LVM-Logical-Volume-Manager)
+[Entendendo LVM](https://www.vivaolinux.com.br/artigo/Entendendo-e-configurando-o-LVM-manualmente?pagina=4)
+[LVM Dicas Rapidas](http://gutocarvalho.net/octopress/2013/05/17/lvm-dicas-rapidas/)

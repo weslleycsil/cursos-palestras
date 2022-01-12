@@ -3,5 +3,6 @@
 
 ## Criando um Cluster de Docker Swarm do Zero até o deploy da Applicação
 
-[Criando um Cluster de Docker Swarm do Zero até o deploy da Applicação](https://github.com/github/training-kit/blob/master/CONTRIBUTING.md)
+Repositório - [Criando um Cluster de Docker Swarm do Zero até o deploy da Applicação](https://github.com/weslleycsil/cursos-palestras/tree/master/Cluster%20Docker)
+
 [Live Cluster Docker 12/01/2021 - Youtube  @infraantenada](https://www.youtube.com/watch?v=W7o30oi70Jk)
