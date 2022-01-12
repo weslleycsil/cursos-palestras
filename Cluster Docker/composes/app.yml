@@ -1,0 +1,35 @@
+version: '3.5'
+
+networks:
+  backend:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+ 
+services:
+  api:
+    image: weslleycsil/ask-api:1.0
+    container_name: api
+    hostname: api
+    restart: always
+    networks: 
+      - backend
+    environment:
+      - NODE_ENV=production
+  site:
+    image: weslleycsil/ask-app:1.0
+    restart: always
+    networks:
+      - traefik_proxy 
+      - backend
+    deploy:
+      labels:
+        - "traefik.web.port=80"
+        - "traefik.docker.network=traefik_proxy"
+        - "traefik.web.frontend.rule=Host:subnetquestions.dominio.com.br;"
+  database:
+    image: mongo:4.4.11-focal
+    networks: 
+      - backend
+    environment:
+      - MONGO_INITDB_DATABASE=asksforyou

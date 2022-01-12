@@ -1,0 +1,32 @@
+docker pull jwilder/whoami
+version: '3.5'
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+
+volume:
+  site-tw:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=10.10.10.250,rw
+      device: ":/NFS_VOL/HDD/site-tw"
+
+services: 
+  who:
+    image: nginx
+    volumes:
+     - site-tw:/usr/share/nginx/html
+    environment:
+     - NGINX_HOST=dominio.com.br
+     - NGINX_PORT=80
+    restart: always
+    networks:
+      - traefik_proxy
+    deploy:
+      labels:
+        - "traefik.web.port=80"
+        - "traefik.docker.network=traefik_proxy"
+        - "traefik.web.frontend.rule=Host:dominio.com.br;"
