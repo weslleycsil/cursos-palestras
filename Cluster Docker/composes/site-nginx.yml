@@ -1,4 +1,3 @@
-docker pull jwilder/whoami
 version: '3.5'
 
 networks:
