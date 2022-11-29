@@ -1,8 +1,6 @@
 Docker desde o Básico até a Criação do Cluster Swarm e integração com um Servidor NFS
 =============
 
-Repositório da Live que rola dia 12/01/2022 no Yotube Canal [Infra Antenada](https://www.youtube.com/watch?v=W7o30oi70Jk)
-
 Esse repositório contem manuais e scripts para fazer a Configuração de um Cluster de Docker Swarm e integra-lo com um Servidor NFS (que também será criado).
 
 O passo a passo é intuitivo, porém caso queira mais informações você também pode acompanhar o video no canal do Youtube [Infra Antenada](https://www.youtube.com/watch?v=W7o30oi70Jk)
