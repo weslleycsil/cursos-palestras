@@ -1,0 +1,18 @@
+version: '3.5'
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+      
+services: 
+  who:
+    image: jwilder/whoami
+    restart: always
+    networks:
+      - traefik_proxy
+    deploy:
+      labels:
+        - "traefik.web.port=8000"
+        - "traefik.docker.network=traefik_proxy"
+        - "traefik.web.frontend.rule=Host:host.dominio.com.br;"

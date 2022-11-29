@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+    traefik:
+        image: traefik:v1.7.32-alpine
+        command:
+            - "--api"
+            - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+            - "--entrypoints=Name:https Address::443 TLS"
+            - "--defaultentrypoints=http,https"
+            - "--acme"
+            - "--acme.storage=/data/acme.json"
+            - "--acme.entryPoint=https"
+            - "--acme.httpChallenge.entryPoint=http"
+            - "--acme.onHostRule=true"
+            - "--acme.onDemand=false"
+            - "--acme.email=email@gmail.com"
+            - "--docker"
+            - "--docker.swarmMode"
+            - "--docker.domain=dominio.com.br"
+            - "--docker.watch"
+        networks:
+            - traefik_proxy
+        ports:
+            - "80:80"
+            - "443:443"
+            - "9001:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - traefik_data:/data
+        deploy:
+            mode: global
+            placement:
+                constraints:
+                - node.role == manager
+            update_config:
+                parallelism: 1
+                delay: 10s
+            restart_policy:
+                condition: on-failure
+volumes:
+    traefik_data:
+        driver: local
+        driver_opts:
+          type: nfs
+          o: nfsvers=4,addr=10.10.10.250,rw
+          device: ":/NFS_VOL/HDD/traefik"
+
+networks:
+    traefik_proxy:
+      external:
+        name: traefik_proxy
+    default:
+      driver: overlay
