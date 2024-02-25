@@ -11,3 +11,10 @@ Repositório - [Criando um Cluster de Docker Swarm do Zero até o deploy da Appl
 ## Aprender Docker pra que?
 
 Repositório - [Aprender Docker pra que?](https://github.com/weslleycsil/cursos-palestras/tree/master/Aprender%20Docker%20Pra%20Que)
+
+## Automatizando a Configuração da sua Rede e Infraestrutura
+
+Respositório - []()
+Videos ao Vivo:
+[Dia 1]()
+[Dia 2]()
