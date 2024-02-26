@@ -48,3 +48,13 @@ eth0 - Gi1/2 SW1
 
 
 
+Material Base Cisco Autoinstall
+https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/fundamentals/configuration/15mt/fundamentals-15-mt-book/cf-autoinstall.html
+https://packetpushers.net/blog/freeztp/
+https://github.com/PackeTsar/freeztp/tree/latest
+
+
+Repositórios de ZTP (zero touch provisioning)
+https://github.com/jeremycohoe/IOSXE-Zero-Touch-Provisioning
+https://github.com/cisco-ie/IOSXE_ZTP
+https://github.com/tdorssers/ztp

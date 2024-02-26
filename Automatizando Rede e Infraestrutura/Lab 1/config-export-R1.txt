@@ -1,25 +1,29 @@
 conf t
-int vlan 1
+int gi 0/0
 ip add 10.20.1.1 255.255.255.0
 no shut
-int vlan 10
+int gi 0/0.10
+encapsulation dot1Q 10
 ip add 10.20.10.1 255.255.255.252
 no shut
-int vlan 20
+int gi 0/0.20
+encapsulation dot1Q 20
 ip add 10.20.20.1 255.255.255.252
 no shut
-int vlan 30
+int gi 0/0.30
+encapsulation dot1Q 30
 ip add 10.20.30.1 255.255.255.252
 no shut
-int vlan 100
+int gi 0/0.100
+encapsulation dot1Q 100
 ip add 10.20.100.1 255.255.255.0
 no shut
 exit
 
-conf t
-ip dhcp excluded-address 10.20.1.1
 
+ip dhcp excluded-address 10.20.1.1 10.20.1.10
 ip dhcp pool Provisionamento
 network 10.20.1.0 255.255.255.0
 default-router 10.20.1.1
+option 150 ip 10.20.1.2
 exit
