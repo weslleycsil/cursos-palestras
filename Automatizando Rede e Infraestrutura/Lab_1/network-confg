@@ -1,0 +1,5 @@
+ip host R2 10.20.1.12
+ip host R3 10.20.1.13
+ip host R4 10.20.1.14
+
+end

@@ -1,0 +1,26 @@
+hostname R3
+ip domain-name twcreativs.com.br
+
+lldp run
+
+username cisco priv 15 secret Cisco
+
+crypto key generate rsa general-keys modulus 2048
+
+line vty 0 4
+logging synchronous
+login local
+transport input all
+exit
+
+int eth 0/0.20
+ encapsulation dot1Q 20
+ ip add 10.20.20.2 255.255.255.252
+ no shut
+
+int eth 0/0.100
+ encapsulation dot1Q 100
+ ip add 10.20.100.13 255.255.255.0
+ no shut
+
+end

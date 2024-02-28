@@ -1,0 +1,46 @@
+conf t
+hostname SW2
+ip domain-name twcreativs.com.br
+
+username cisco priv 15 secret Cisco
+
+line vty 0 4
+logging synchronous
+login local
+transport input all
+exit
+
+crypto key generate rsa general-keys modulus 2048
+
+vlan 1
+vlan 10
+vlan 20
+vlan 30
+vlan 100
+exit
+
+int vlan 100
+ip add 10.20.100.3 255.255.255.0
+no shut
+exit
+
+ip default-gateway 10.20.100.1
+
+int eth 0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,30,100
+switchport trunk native vlan 1
+
+int eth 1/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,100
+switchport trunk native vlan 1
+
+int eth 1/0
+switchport mode access
+switchport access vlan 1
+end
+
+wr

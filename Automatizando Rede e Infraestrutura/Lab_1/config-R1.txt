@@ -1,4 +1,17 @@
 conf t
+hostname R1
+ip domain-name twcreativs.com.br
+
+username cisco priv 15 secret Cisco
+
+line vty 0 4
+logging synchronous
+login local
+transport input all
+exit
+
+crypto key generate rsa general-keys modulus 2048
+
 int gi 0/0
 ip add 10.20.1.1 255.255.255.0
 no shut
@@ -20,10 +33,11 @@ ip add 10.20.100.1 255.255.255.0
 no shut
 exit
 
-
 ip dhcp excluded-address 10.20.1.1 10.20.1.10
 ip dhcp pool Provisionamento
 network 10.20.1.0 255.255.255.0
 default-router 10.20.1.1
 option 150 ip 10.20.1.2
-exit
+end
+
+wr
