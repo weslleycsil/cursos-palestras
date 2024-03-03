@@ -1,0 +1,74 @@
+#!ipxe
+
+cpuid --ext 29 && set arch x64 || set arch x86
+set server-ip:ipv4      10.20.1.1
+set nfs-pth             /srv/tftp/imagens/
+
+isset ${menu-default} || set menu-default local_disk
+set menu-timeout 20000
+
+:start
+menu Boot Remoto TW Creativs
+
+item local_disk Inicializar pelo disco local
+item --gap --
+item --gap --  ----------------------  Linux  ------------------------
+item ubuntu_22_04_server Ubuntu Server amd64 22.04 LTS
+item --gap --  ----------------------  Esxi  ------------------------
+item esxi ESXi 7.0U3n
+choose --default ${menu-default} --timeout ${menu-timeout} option && goto ${option} || goto cancel
+
+
+:ubuntu_22_04_server
+kernel nfs://${server-ip}:${nfs-pth}/ubuntu-22.04-server/casper/vmlinuz
+initrd nfs://${server-ip}:${nfs-pth}/ubuntu-22.04-server/casper/initrd
+imgargs vmlinuz initrd=initrd boot=casper netboot=nfs nfsroot=${server-ip}:${nfs-pth}/ubuntu-22.04-server ip=dhcp nomodeset toram
+boot || goto failed
+goto start
+
+
+:esxi
+iseq ${platform} efi && goto esxi_efi || goto esxi_legacy
+    :esxi_efi
+    echo EFI
+    sanboot tftp://${server-ip}/ipxe/isos/esxi-7.0U3n.iso
+
+    :esxi_legacy
+    echo Legacy
+    kernel tftp://${server-ip}/ipxe/bin/memdisk/memdisk iso
+    initrd tftp://${server-ip}/ipxe/isos/esxi-7.0U3n.iso
+    boot
+
+
+
+:local_disk
+echo Bootando pelo Disco Local...
+iseq ${platform} efi && goto local_disk_efi || goto local_disk_legacy
+    :local_disk_efi
+    echo EFI
+    exit 1
+
+    :local_disk_legacy
+    echo Legacy
+    sanboot --no-describe --drive 0x80
+
+:cancel
+echo Voce cancelou o boot, encaminhando voce para um shell.
+
+:shell
+echo Escreva 'exit' para voltar ao menu
+shell
+set menu-timeout 0
+set submenu-timeout 0
+goto start
+
+:failed
+echo O Boot Falhou, encaminhando voce para um shell.
+goto shell
+
+:reboot
+reboot
+
+:config
+config
+goto start
