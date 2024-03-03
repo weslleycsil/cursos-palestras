@@ -20,6 +20,18 @@ R4 irá receber a vlan 30 e vlan 100
 
 ![Topologia 1](images/topologia_1.png)
 
+## Autoinstall Cisco
+
+O processo de autoinstall da cisco é bem simples, basicamente na inicialização de um switch ou roteador cisco, ele tenta buscar informações a respeito de si em um serviço TFTP na rede. A interface entra em modo DHCP, recebe um endereço IP e caso no pacote recebido ele encontre um option 150 ou alguma informação a respeito de onde buscar um arquivo de configuração ele irá baixar inicialmente (caso não recebe um bootfilename) o arquivo padrão chamado de `network-confg` e após não encontrar esse nome, ele irá procurar outros.
+
+No nosso caso, ele irá receber no pacote DHCP um option 150 que indicará o endereço IP do servidor TFTP, em seguida ele irá buscar o arquivo network-confg e se configurar, já que o mesmo existe.
+Aqui temos um detalhe, se você procurar entender o conteúdo do arquivo você verá que não tem nada alem da definição de alguns nomes. Isso se dá pois não queremos que todos os roteadores tenham a mesma configuração e sim cada um puxe a sua configuração, e para isso precisariamos de uma forma de dizer quem é quem. Isso pode ser dito através do uuid do dispositivo (o que não é algo tão simples de se obter sem ligar o aparelho), ou utilizar um hostname para o dispositivo, atrelado ao seu IP.
+Com isso o arquivo `network-confg` seta 3 IPs e hostnames para cada um, sendo assim, o roteador irá pegar essa configuração inicial, irá ver qual é o seu IP e Hostname e irá buscar em seguida o arquivo com o nome `rX-confg` onde X é o numero do roteador.
+Assim conseguimos que cada um puxe um arquivo diferente. Isso também poderia ser feito através de DNS, porém para simplificar optamos por fazer de modo manual.
+
+
+## Conexões
+
 R1 - Portas\
 Gi0/0 - Gi0/0 SW1\
 [Configuração do R1](config-R1.txt)
