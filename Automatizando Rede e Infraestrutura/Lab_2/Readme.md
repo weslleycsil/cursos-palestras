@@ -16,16 +16,18 @@ Servidor linux e VPC ambos em DHCP.
 
 ![Topologia 2](images/topologia_2.png)
 
+## Funcionamento do Lab
+
 ## Conexões
 
 SW1 - Portas\
-Eth 1 - Eth 0 TFTP
-Eth 2 - Eth 0 Linux
+Eth 1 - Eth 0 TFTP\
+Eth 2 - Eth 0 Linux\
 Eth 0 - Eth 0 VPC
 
 Servidor TFTP - Portas\
-Ens 3 - Eth 1 SW1
-Ens 4 - Eth Cloud (Internet)
+Ens 3 - Eth 1 SW1\
+Ens 4 - Eth Cloud (Internet)\
 [Configuração Servidor](TFTP.md)
 
 ## Imagens Utilizadas
@@ -48,6 +50,8 @@ Para que o node "Linux" possa fazer o boot pela rede, é necessário mudar um pa
 
 ## Links Base
 
-https://ubuntu.com/server/docs/how-to-install-and-configure-isc-dhcp-server\
-https://wiki.gentoo.org/wiki/QEMU/Options#Boot_order\
+https://ubuntu.com/server/docs/how-to-install-and-configure-isc-dhcp-server
+
+https://wiki.gentoo.org/wiki/QEMU/Options#Boot_order
+
 https://ipxe.org/

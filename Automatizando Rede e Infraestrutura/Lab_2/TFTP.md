@@ -74,3 +74,19 @@ ipxe
 \-- imagens -> onde ficarão as imagens isos montadas para o NFS (falaremos mais depois)
 \-- bin -> onde ficarão arquivos binarios do syslinux 5.10
 ```
+
+## Instalação do NFS
+
+Precisaremos fazer a instalação do NFS para podermos entregar certas imagens (linux) e também entregar de forma mais rapida isos e etc.
+
+```
+apt install nfs-kernel-server
+```
+
+## Download do Syslinux
+
+Precisaremos do download do syslinux para podermos carregar isos diretamente no ipxe. Após o download, basta descompactar no diretório /srv/tft/bin/
+
+```
+wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-5.10.zip
+```
