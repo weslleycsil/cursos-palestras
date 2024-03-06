@@ -90,3 +90,41 @@ Precisaremos do download do syslinux para podermos carregar isos diretamente no 
 ```
 wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-5.10.zip
 ```
+
+## Configuração do DHCP Server
+
+Para entregarmos o DHCP nesse Lab, iremos utilizar o serviço no servidor Linux mesmo. Para isso, instalamos o pacote e faremos as configs necessárias como a seleção da interface que iremos utilizar para o serviço e também a configuração para entregar o filename para o computador buscar o arquivo do iPXE.
+
+```
+sudo apt install isc-dhcp-server
+```
+
+Selecionamos a interface que iremos utilizar no arquivo `/etc/default/isc-dhcp-server`
+
+```
+INTERFACESv4="ens3"
+```
+
+Adicionamos ao arquivo de configuração, as informações necessárias para o boot pxe funcionar corretamente no arquivo `/etc/dhcp/dhcpd.conf`
+
+```
+subnet 10.20.1.0 netmask 255.255.255.0 {
+    range 10.20.1.100 10.20.1.199;
+    option routers 10.20.1.1;
+    option domain-name-servers 10.20.1.1;
+    next-server 10.20.1.1;
+    if exists user-class and option user-class = "iPXE" {
+        filename "ipxe/menu.ipxe";
+    } elsif option client-arch != 0 {
+        filename "ipxe/ipxe.efi";
+    } else {
+        filename "ipxe/undionly.kpxe";
+    }
+}
+```
+
+E por fim, reiniciamos o serviço do dhcp para que o mesmo inicie com as informações corretas.
+
+```
+sudo systemctl restart isc-dhcp-server.service
+```
