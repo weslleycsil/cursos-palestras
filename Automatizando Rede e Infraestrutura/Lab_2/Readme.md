@@ -50,8 +50,9 @@ Para que o node "Linux" possa fazer o boot pela rede, é necessário mudar um pa
 
 ## Links Base
 
-https://ubuntu.com/server/docs/how-to-install-and-configure-isc-dhcp-server
-
-https://wiki.gentoo.org/wiki/QEMU/Options#Boot_order
-
-https://ipxe.org/
+- https://ubuntu.com/server/docs/how-to-install-and-configure-isc-dhcp-server
+- https://wiki.gentoo.org/wiki/QEMU/Options#Boot_order
+- https://ipxe.org/
+- https://netboot.xyz/
+- https://www.virten.net/2021/11/automated-esxi-installation-inject-kickstart-file-to-esxi-iso/
+- https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.esxi.install.doc/GUID-CAB84194-3D8E-45F0-ABF9-0277710C8F98.html
