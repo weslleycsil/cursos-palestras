@@ -108,13 +108,14 @@ INTERFACESv4="ens3"
 Adicionamos ao arquivo de configuração, as informações necessárias para o boot pxe funcionar corretamente no arquivo `/etc/dhcp/dhcpd.conf`
 
 ```
+option client-arch code 93 = unsigned integer 16;
 subnet 10.20.1.0 netmask 255.255.255.0 {
     range 10.20.1.100 10.20.1.199;
     option routers 10.20.1.1;
     option domain-name-servers 10.20.1.1;
     next-server 10.20.1.1;
     if exists user-class and option user-class = "iPXE" {
-        filename "ipxe/menu.ipxe";
+        filename "ipxe/menu/menu.ipxe";
     } elsif option client-arch != 0 {
         filename "ipxe/ipxe.efi";
     } else {
