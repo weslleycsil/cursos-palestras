@@ -1,0 +1,13 @@
+[switches]
+SW1 ansible_host=10.20.100.2
+
+[switches:vars]
+ansible_user=cisco
+ansible_password=Cisco
+
+[routers]
+R1 ansible_host=10.20.100.1
+
+[routers:vars]
+ansible_user=vyos
+ansible_password=vyos

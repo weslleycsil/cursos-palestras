@@ -1,0 +1,34 @@
+---
+
+- name: Configuracao Basica de Switchs Cisco
+hosts: switches
+gather_facts: false
+connection: local
+
+tasks:
+- name: MOTD banner
+ios_config:
+lines:
+- banner motd &**************** TW Creativs - Automacao Live *********************&
+
+
+- name: Cria Vlans e Configura Int Troncos
+ios_config:
+lines:
+- vlan 10
+- vlan 20
+- vlan 30
+
+- name: Configurar Po1
+ios_config:
+lines:
+- int port-channel 1
+
+- name: Configurar Po2
+ios_config:
+lines:
+- int port-channel 2
+
+- name: save running to startup quando alterada com sucesso
+  ios_config:
+    save_when: modified
