@@ -4,6 +4,9 @@ SW1 ansible_host=10.20.100.2
 [switches:vars]
 ansible_user=cisco
 ansible_password=Cisco
+ansible_become=yes
+ansible_become_method=enable
+ansible_network_os=cisco.ios.ios
 
 [routers]
 R1 ansible_host=10.20.100.1
@@ -11,3 +14,5 @@ R1 ansible_host=10.20.100.1
 [routers:vars]
 ansible_user=vyos
 ansible_password=vyos
+ansible_network_os=vyos
+ansible_connection=network_cli
