@@ -1,48 +1,48 @@
 ---
 
 - name: Configuracao de LACP Cisco
-hosts: switches
-gather_facts: false
-connection: local
+  hosts: switches
+  gather_facts: false
+  connection: local
 
-tasks:
-- name: Configurar Range 1
-ios_config:
-lines:
-- channel-group 1 mode active
-- no shut
-parents:
-- int range eth 1/0-3
+  tasks:
+    - name: Configurar Range 1
+      ios_config:
+        lines:
+          - channel-group 1 mode active
+          - no shut
+        parents:
+          - int range eth 1/0-3
 
-- name: Configurar Range 2
-ios_config:
-lines:
-- channel-group 2 mode active
-- no shut
-parents:
-- int range eth 2/0-3
+    - name: Configurar Range 2
+      ios_config:
+        lines:
+          - channel-group 2 mode active
+          - no shut
+        parents:
+          - int range eth 2/0-3
 
-- name: Configurar Po1
-ios_config:
-lines:
-- description LAG_SW1-ESXi1
-- switchport trunk encapsulation dot1q
-- switchport mode trunk
-- switchport trunk allowed vlan 10,20,30,100
-parents:
-- int port-channel 1
+    - name: Configurar Po1
+      ios_config:
+        lines:
+          - description LAG_SW1-ESXi1
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+          - switchport trunk allowed vlan 10,20,30,100
+        parents:
+          - int port-channel 1
 
-- name: Configurar Po2
-ios_config:
-lines:
-- description LAG_SW-ESXi2
-- switchport trunk encapsulation dot1q
-- switchport mode trunk
-- switchport trunk allowed vlan 10,20,30,100
-parents:
-- int port-channel 2
+    - name: Configurar Po2
+      ios_config:
+        lines:
+          - description LAG_SW-ESXi2
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+          - switchport trunk allowed vlan 10,20,30,100
+        parents:
+          - int port-channel 2
 
 
-- name: save running to startup quando alterada com sucesso
-  ios_config:
-    save_when: modified
+    - name: save running to startup quando alterada com sucesso
+      ios_config:
+        save_when: modified

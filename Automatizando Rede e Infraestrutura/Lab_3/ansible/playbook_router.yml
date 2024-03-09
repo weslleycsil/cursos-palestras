@@ -1,97 +1,84 @@
 ---
 
 - name: Configuracao do Router Vyos
-hosts: routers
-gather_facts: false
-connection: local
+  hosts: routers
+  gather_facts: false
+  connection: local
 
-tasks:
-- name: Configura Login Banner
-  vyos_banner:
-    banner: pre-login
-    text: |
-      ----------------------------------------
-      |
-      | Banner gerado pelo Asible
-      |
-      ----------------------------------------
-      |
-      | Você está logado em R1
-      |
-      ----------------------------------------
-      |
-    state: present
+  tasks:
+    - name: Configure Hostname
+      vyos_config:
+        lines:
+          - set system host-name R1
 
-- name: Configure Hostname
-  vyos_config:
-    lines:
-    - set system host-name R1
+    - name: Configure Interface Wan
+      vyos_config:
+        lines:
+          - set interfaces ethernet eth0 address dhcp
+          - set interfaces ethernet eth0 description 'WAN'
 
-- name: Configure Interface Wan
-  vyos_config:
-    lines:
-    - set interfaces ethernet eth0 address dhcp
-    - set interfaces ethernet eth0 description 'WAN'
+    - name: Configure Sub Interfaces Lan
+      vyos_config:
+        lines:
+          - set interfaces ethernet eth1 vif 10 address 10.20.10.1/24
+          - set interfaces ethernet eth1 vif 10 description 'VLAN 10'
+          - set interfaces ethernet eth1 vif 20 address 10.20.20.1/24
+          - set interfaces ethernet eth1 vif 20 description 'VLAN 20'
+          - set interfaces ethernet eth1 vif 30 address 10.20.30.1/24
+          - set interfaces ethernet eth1 vif 30 description 'VLAN 30'
+          - set interfaces ethernet eth1 vif 100 address 10.20.100.1/24
+          - set interfaces ethernet eth1 vif 100 description 'VLAN 100'
 
-- name: Configure Sub Interfaces Lan
-  vyos_config:
-    lines:
-      - set interfaces ethernet eth1 vif 10 address 10.20.10.1/24
-      - set interfaces ethernet eth1 vif 10 description 'VLAN 10'
-      - set interfaces ethernet eth1 vif 20 address 10.20.20.1/24
-      - set interfaces ethernet eth1 vif 20 description 'VLAN 20'
-      - set interfaces ethernet eth1 vif 30 address 10.20.30.1/24
-      - set interfaces ethernet eth1 vif 30 description 'VLAN 30'
-      - set interfaces ethernet eth1 vif 100 address 10.20.100.1/24
-      - set interfaces ethernet eth1 vif 100 description 'VLAN 100'
+    - name: Configure SSH
+      vyos_config:
+        lines:
+          - set service ssh port '22'
 
-- name: Configure SSH
-  vyos_config:
-    - set service ssh port '22'
+    - name: Set Nat
+      vyos_config:
+        lines:
+          - set nat source rule 100 outbound-interface 'eth0'
+          - set nat source rule 100 source address '10.20.100.0/24'
+          - set nat source rule 100 translation address 'masquerade'
+          - set nat source rule 10 outbound-interface 'eth0'
+          - set nat source rule 10 source address '10.20.10.0/24'
+          - set nat source rule 10 translation address 'masquerade'
+          - set nat source rule 20 outbound-interface 'eth0'
+          - set nat source rule 20 source address '10.20.20.0/24'
+          - set nat source rule 20 translation address 'masquerade'
+          - set nat source rule 30 outbound-interface 'eth0'
+          - set nat source rule 30 source address '10.20.30.0/24'
+          - set nat source rule 30 translation address 'masquerade'
 
-- name: Set Nat
-  vyos_config:
-    - set nat source rule 100 outbound-interface 'eth0'
-    - set nat source rule 100 source address '10.20.100.0/24'
-    - set nat source rule 100 translation address 'masquerade'
-    - set nat source rule 10 outbound-interface 'eth0'
-    - set nat source rule 10 source address '10.20.10.0/24'
-    - set nat source rule 10 translation address 'masquerade'
-    - set nat source rule 20 outbound-interface 'eth0'
-    - set nat source rule 20 source address '10.20.20.0/24'
-    - set nat source rule 20 translation address 'masquerade'
-    - set nat source rule 30 outbound-interface 'eth0'
-    - set nat source rule 30 source address '10.20.30.0/24'
-    - set nat source rule 30 translation address 'masquerade'
+    - name: Set DHCP
+      vyos_config:
+        lines:
+          - set service dhcp-server
+          - set service dhcp-server shared-network-name eth1.100 authoritative
+          - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 default-router '10.20.100.1'
+          - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 dns-server '8.8.8.8'
+          - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 lease '86400'
+          - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 range 0 start 10.20.100.100 
+          - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 range 0 stop '10.20.100.200'
+          - set service dhcp-server shared-network-name eth1.10 authoritative
+          - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 default-router '10.20.10.1'
+          - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 dns-server '8.8.8.8'
+          - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 lease '86400'
+          - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 range 0 start 10.20.10.100 
+          - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 range 0 stop '10.20.10.200'
+          - set service dhcp-server shared-network-name eth1.20 authoritative
+          - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 default-router '10.20.20.1'
+          - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 dns-server '8.8.8.8'
+          - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 lease '86400'
+          - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 range 0 start 10.20.20.100 
+          - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 range 0 stop '10.20.20.200'
+          - set service dhcp-server shared-network-name eth1.30 authoritative
+          - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 default-router '10.20.30.1'
+          - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 dns-server '8.8.8.8'
+          - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 lease '86400'
+          - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 range 0 start 10.20.30.100
+          - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 range 0 stop '10.20.30.200'
 
-- name: Set DHCP
-  vyos_config:
-    - set service dhcp-server
-    - set service dhcp-server shared-network-name eth1.100 authoritative
-    - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 default-router '10.20.100.1'
-    - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 dns-server '8.8.8.8'
-    - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 lease '86400'
-    - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 range 0 start 10.20.100.100 
-    - set service dhcp-server shared-network-name eth1.100 subnet 10.20.100.0/24 range 0 stop '10.20.100.200'
-    - et service dhcp-server shared-network-name eth1.10 authoritative
-    - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 default-router '10.20.10.1'
-    - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 dns-server '8.8.8.8'
-    - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 lease '86400'
-    - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 range 0 start 10.20.10.100 
-    - set service dhcp-server shared-network-name eth1.10 subnet 10.20.10.0/24 range 0 stop '10.20.10.200'
-    - set service dhcp-server shared-network-name eth1.20 authoritative
-    - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 default-router '10.20.20.1'
-    - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 dns-server '8.8.8.8'
-    - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 lease '86400'
-    - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 range 0 start 10.20.20.100 
-    - set service dhcp-server shared-network-name eth1.20 subnet 10.20.20.0/24 range 0 stop '10.20.20.200'
-    - set service dhcp-server shared-network-name eth1.30 authoritative
-    - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 default-router '10.20.30.1'
-    - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 dns-server '8.8.8.8'
-    - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 lease '86400'
-    - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 range 0 start 10.20.30.100
-    - set service dhcp-server shared-network-name eth1.30 subnet 10.20.30.0/24 range 0 stop '10.20.30.200'
-
-- name: Save configuration
-  vyos_config:
-    save: true
+    - name: Save configuration
+      vyos_config:
+        save: true
