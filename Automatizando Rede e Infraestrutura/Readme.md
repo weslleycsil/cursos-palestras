@@ -19,3 +19,9 @@ Abordaremos: MaaS, Ansible
 
 https://github.com/ansible-collections/cisco.ios\
 https://github.com/mpenning/ciscoconfparse
+
+https://github.com/hegdepavankumar/Cisco-Images-for-GNS3-and-EVE-NG/tree/main
+https://github.com/pvrmza/labsvault/blob/master/scripts/eve-ng_tunning.sh
+https://github.com/ttafsir/evengsdk
+http://dl.nextadmin.net/dl/EVE-NG-image/qemu/
+https://mega.nz/folder/30p3TKob#42_S__9wwPVO0zHIfC4xow
